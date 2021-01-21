@@ -1,0 +1,19 @@
+{
+  "name": "livelearn",
+  "version": "1.0.0",
+  "description": "live learning",
+  "main": "App.js",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [
+    "learn",
+    "live"
+  ],
+  "author": "chellathurai,ajayrajan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.5.1"
+  }
+}
