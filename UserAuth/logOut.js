@@ -1,7 +1,7 @@
 const conn=require("../Models/connection.js").client
 module.exports=function(req,res,next){
     console.log("Logout called")
-     conn.query(`delete from sessions where sessions.cookie=$1`,[req.cookie]) 
+     conn.query(`delete from sessions where sessions.cookie=$1`,[req.cookies.cookie]) 
      .then(data=>{
         res.clearCookie('cookie')
         res.redirect("/login")

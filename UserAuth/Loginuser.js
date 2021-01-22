@@ -15,7 +15,7 @@ module.exports=function(req,res,next){
         .then(data=>{
             if(data.rowCount){
             console.log("password wrong")
-            res.redirect("/login")
+            res.render("Nologin.ejs")
             }
             else
             res.redirect("/signin")
