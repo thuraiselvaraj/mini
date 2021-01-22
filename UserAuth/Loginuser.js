@@ -8,7 +8,8 @@ module.exports=function(req,res,next){
     conn.query(`select * from  login where login.email=$1 and login.password=$2;`,[email,password])
    .then(data=>{
     if(data.rowCount){
-     CreateCookie(email,res)
+     console.log(data)
+     CreateCookie(data.rows[0].id,email,res)
     }   
      else{
         conn.query(`select login.email from  login where login.email=$1;`,[email])
@@ -24,11 +25,14 @@ module.exports=function(req,res,next){
     }
    })
     .catch(err=>{
+        console.log("Loginuser err",err)
       res.redirect("/signin")
     })
     }
-    else
+    else{
+    console.log("No post")
     res.render("login.ejs")
+    }
 }
 
 

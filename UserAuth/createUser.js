@@ -10,7 +10,7 @@ module.exports=function(req,res,next){
     conn.query(`insert into login  values($1,$2,$3,$4) RETURNING *;`,[email,firstname,lastname,password])
    .then(data=>{
     console.log(data)
-    CreateCookie(email,res)
+    CreateCookie(data.rows[0].id,email,res)
     })
     .catch(err=>{
     console.error(err.stack)

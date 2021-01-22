@@ -1,8 +1,8 @@
 const conn=require("../Models/connection.js").client
 const crypto = require("crypto");
-function CreateCookie(email,res){
+function CreateCookie(id,email,res){
      let cookie=crypto.randomBytes(16).toString("hex")
-     conn.query(`insert into sessions values($2,$1) returning *`,[cookie,email]) 
+     conn.query(`insert into sessions values($3,$2,$1) returning *`,[cookie,email,id]) 
      .then(data=>{
         if(data.rowCount){
         console.log("successfully authenticated")
@@ -13,6 +13,7 @@ function CreateCookie(email,res){
         res.redirect("/login")
         })
       .catch(err=>{
+        console.log(err)
         res.redirect("/login")
           })
         }
