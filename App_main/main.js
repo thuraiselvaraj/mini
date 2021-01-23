@@ -5,6 +5,7 @@ const userLoginMW=require("../UserAuth/Loginuser")
 const authMW=require("../UserAuth/authenticate")
 const cookie_parser=require("cookie-parser")
 const logoutMW=require("../UserAuth/logOut")
+const path=require("path")
 const app=express()
 app.set('view engine', 'ejs');
 const port=3000;
@@ -12,7 +13,7 @@ const host="localhost"
 app.use(cookie_parser())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.set('views', ["../Templates"]);
+app.set('views', [path.join(__dirname,"..","Templates")]);
 
 app.use("/signin",userCreateMW)
 app.use("/login",userLoginMW)

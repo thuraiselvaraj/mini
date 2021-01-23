@@ -1,0 +1,11 @@
+{
+	"user_age":20,
+	"user_location":"Dindigul",
+	"user_qualification":["ME","MBA"],
+	"user_role":"Student",
+	"user_languages":["ruby","Python","java"],
+	"user_tech":["Docker","AWS"],
+	"user_specialization":["serverless","Devops"]
+}
+
+

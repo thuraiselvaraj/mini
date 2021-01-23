@@ -7,10 +7,17 @@ module.exports=function(req,res,next){
     if(data.rowCount){
        conn.query(`select * from  login where login.email=$1 ;`,[data.rows[0].email])
        .then(data=>{
+        if(data.rowCount){
+       console.log(data)
+       req.uid=data.rows[0].id
        req.username=data.rows[0].firstname+data.rows[0].lastname
        req.email=data.rows[0].email
        req.auth=true
        next() 
+        }
+       else{
+        res.redirect("/login")
+       }
        })  
        .catch(err=>console.error(err))
       }

@@ -31,6 +31,9 @@ module.exports=function(req,res,next){
     }
     else{
     console.log("No post")
+    if(req.cookies.cookie){
+        res.redirect("/home")
+    }
     res.render("login.ejs")
     }
 }
