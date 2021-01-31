@@ -3,10 +3,13 @@ const bodyParser=require("body-parser")
 const userCreateMW=require("../UserAuth/createUser")
 const userLoginMW=require("../UserAuth/Loginuser")
 const authMW=require("../UserAuth/authenticate")
+const rest_auth=require("../UserAuth/rest_auth")
 const cookie_parser=require("cookie-parser")
 const logoutMW=require("../UserAuth/logOut")
 const path=require("path")
 const app=express()
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 app.set('view engine', 'ejs');
 const port=3000;
 const host="localhost"
@@ -18,6 +21,7 @@ app.set('views', [path.join(__dirname,"..","Templates")]);
 app.use("/signin",userCreateMW)
 app.use("/login",userLoginMW)
 app.use(authMW)
+app.use("/api",rest_auth)
 app.use("/logout",logoutMW)
 app.get("/",(req,res)=>{
   res.write("Welcome to My app")
@@ -38,3 +42,5 @@ app.get("/test",(req,res)=>{
 app.listen({host,port},()=>{
     console.log(`Server started successfully on PORT ${port}`)
      })
+
+module.exports.io=io;
