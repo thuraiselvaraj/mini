@@ -1,4 +1,4 @@
-const conn=require("../Models/connection.js").client
+const conn=require("../Postgres_Models/connection.js").client
 const {CreateCookie}=require("./createCookie")
 module.exports=function(req,res,next){
     if(req.method=="POST"){

@@ -49,7 +49,8 @@ CREATE TABLE IF NOT EXISTS post(
     post_desc varchar,
     p_time DATETIME NOT NULL DEFAULT GETDATE(),
     post_likes int,
-    post_upvotes int
+    post_upvotes int,
+    p_thumb_url varchar
 );
 
 CREATE TABLE IF NOT EXISTS stories(
@@ -57,7 +58,8 @@ CREATE TABLE IF NOT EXISTS stories(
     post_id int references post(post_id),
     s_id int SERIAL PRIMARY KEY UNIQUE,
     s_url varchar,
-    s_time DATETIME NOT NULL DEFAULT GETDATE()
+    s_time DATETIME NOT NULL DEFAULT GETDATE(),
+    p_thumb_url varchar
 );
 
 CREATE TABLE IF NOT EXISTS subscribers(

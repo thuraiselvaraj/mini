@@ -1,4 +1,4 @@
-const conn=require("../Models/connection.js").client
+const conn=require("../Postgres_Models/connection.js").client
 module.exports=function(req,res,next){
     console.log("Logout called")
      conn.query(`delete from sessions where sessions.cookie=$1`,[req.cookies.cookie]) 

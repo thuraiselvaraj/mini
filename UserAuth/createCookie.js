@@ -1,4 +1,4 @@
-const conn=require("../Models/connection.js").client
+const conn=require("../Postgres_Models/connection.js").client
 const crypto = require("crypto");
 function CreateCookie(id,email,res){
      let cookie=crypto.randomBytes(16).toString("hex")
