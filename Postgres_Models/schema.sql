@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS comments(
     c_id int SERIAL PRIMARY KEY UNIQUE,
     post_id int references post(post_id) ,
     parent_id int references comments(c_id),
-    c_time DATETIME NOT NULL DEFAULT GETDATE(),
+    c_time TIMESTAMPTZ NOT NULL DEFAULT Now() ,
     c_data varchar,
     c_likes int,
 
@@ -47,36 +47,44 @@ CREATE TABLE IF NOT EXISTS post(
     post_id int,
     post_url varchar,
     post_desc varchar,
-    p_time DATETIME NOT NULL DEFAULT GETDATE(),
+    post_time TIMESTAMPTZ NOT NULL DEFAULT Now() ,
     post_likes int,
     post_upvotes int,
-    p_thumb_url varchar
+    post_thumb_url varchar
 );
 
 CREATE TABLE IF NOT EXISTS stories(
     id  int references login(id) on delete cascade on update cascade,
     post_id int references post(post_id),
-    s_id int SERIAL PRIMARY KEY UNIQUE,
-    s_url varchar,
-    s_time DATETIME NOT NULL DEFAULT GETDATE(),
-    p_thumb_url varchar
+    story_id int SERIAL PRIMARY KEY UNIQUE,
+    story_url varchar,
+    story_time TIMESTAMPTZ NOT NULL DEFAULT Now() ,
+    story_thumb_url varchar
 );
 
 CREATE TABLE IF NOT EXISTS subscribers(
     id  int references login(id) on delete cascade on update cascade,
-    s_id  int references login(id)
+    sub_id  int references login(id)
 );
 
 
-CREATE TABLE IF NOT EXISTS user_post_rel(
+CREATE TABLE IF NOT EXISTS user_post_relation(
     u_id  int references login(id) on delete cascade on update cascade,
-    story_id int references stories(s_id)
+    story_id int references stories(story_id),
     sub_count int,
 );
 
 
 
 
+CREATE TABLE  IF  NOT EXISTS chats(
+    chat_id serial  PRIMARY KEY UNIQUE,
+    sender_id  int references login(id) on delete cascade on update cascade,
+    receiver_id  int references login(id) on delete cascade on update cascade,
+    chat_content varchar,
+    chat_time TIMESTAMPTZ NOT NULL DEFAULT Now() ,
+    chat_med_url varchar
+) ;
 
     
 

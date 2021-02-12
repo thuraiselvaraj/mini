@@ -9,7 +9,6 @@ const logoutMW=require("../UserAuth/logOut")
 const path=require("path")
 const app=express()
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
 app.set('view engine', 'ejs');
 const port=3000;
 const host="localhost"
@@ -42,5 +41,3 @@ app.get("/test",(req,res)=>{
 app.listen({host,port},()=>{
     console.log(`Server started successfully on PORT ${port}`)
      })
-
-module.exports.io=io;
