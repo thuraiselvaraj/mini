@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>THE EventSource CHAT</title>
+</head>
+
+<body>
+  <h1>THE CHAT</h1>
+  <!-- <textarea readonly id="chat" rows=10 cols=100></textarea> -->
+  <div id="chat" style="width:60%"></div>
+</br>
+  <form id="frm">
+    <input type="text" id="text" size="50" autocomplete="off" autofocus>
+  </form>
+
+  <script >
+let enteredName = false;
+
+let sid = prompt("Sender ?");
+let rid = prompt("Receiver ?");
+
+
+  document.getElementById("chat").value += "Connecting...\n";
+  enteredName = true;
+
+var a=0;
+if (enteredName) {
+  let source = new EventSource(`/chat/${sid}/${rid}`);
+  source.onmessage=UpdateChild;
+  document.getElementById("frm").addEventListener("submit", e => {
+    e.preventDefault();
+    let xmlHttp = new XMLHttpRequest();
+    let textToPost = `{
+      "name" :${rid},
+      "text": "${document.getElementById("text").value}"
+    }`;
+    xmlHttp.open("POST", `/write/${rid}`, false);
+    xmlHttp.setRequestHeader("Content-Type", "application/json");
+    xmlHttp.send(textToPost);
+  });
+  document.getElementById("text").value = "";
+    document.getElementById("text").placeholder = sid;
+}
+
+function UpdateChild(event){
+    console.log(event);
+    let payload=JSON.parse(event.data);
+    console.log(payload);
+    let span = document.createElement('div');
+    let topSpan=document.getElementById('chat')
+    var text=document.createTextNode(payload.text)
+    span.className=payload.name 
+    span.appendChild(text);
+    topSpan.appendChild(document.createElement("br"))
+    topSpan.appendChild(document.createElement("hr"))
+    topSpan.appendChild(span);
+
+
+    document.getElementById("chat").scrollTop = document.getElementById(
+      "chat"
+    ).scrollHeight;
+    document.getElementById("text").value = "";
+    document.getElementById("text").placeholder =rid;
+  }
+</script>
+<style>
+.me{
+  /* position: absolute; */
+  text-align:left;
+  /* left: 6px; */
+  color:green;
+}
+.other{
+  /* position: absolute; */
+  text-align:right;
+  /* right:6px; */
+  color:red;
+}
+</style>
+</body>
+
+</html>
