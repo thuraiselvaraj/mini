@@ -1,15 +1,20 @@
 const express=require("express")
 const bodyParser=require("body-parser")
 const app=express()
+const {client}=require("../Postgres_Models/connection")
 const server = require('http').createServer(app)
+const redis = require("redis"),
+    client = redis.createClient({
+            host:"localhost",
+            port:6379
+        });
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
 app.use("/", express.static("static"));
 
-client=[];
 app.get("/chat/", (req, res) => {
-  client.push(res)
   console.log("inside chat")
         res.writeHead(200, {
           "Content-Type": "text/event-stream",

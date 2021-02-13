@@ -86,5 +86,17 @@ CREATE TABLE  IF  NOT EXISTS chats(
     chat_med_url varchar
 ) ;
 
+
+CREATE TABLE  IF  NOT EXISTS friends(
+    a_id int references login(id) on delete cascade on update cascade,
+    b_id int references login(id) on delete cascade on update cascade,
+);
+
+CREATE TABLE  IF  NOT EXISTS friends(
+    a_id int ,
+    b_id int ,
+);
+
+
     
 

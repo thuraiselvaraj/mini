@@ -1,0 +1,9 @@
+select *  from temptest where temptest.id between 70 and 100 limit 20;;
+
+"select * from (select case when a_id=1 then b_id \
+    when b_id=1 then a_id \
+    end as temp from friends) as c\
+    where temp is not null;\
+"
+
+
