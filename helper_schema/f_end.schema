@@ -1,0 +1,108 @@
+/user/:_id/profile : [ 
+       methods : [
+           GET
+       ]
+       components : [
+            user_main_components : [
+                user_name,
+                user_age,
+                user_display_pic,
+                user_no_mut_details,
+                user_location,
+                user_qualification,
+                user_role,
+                user_languages,
+                user_tech,
+                user_specialization,
+                user_followers_count,
+                user_posts,
+                user_reputation,
+
+            ]
+            user_mutual_components : [
+                user_mut_details,
+            ]
+       ]
+]
+
+/user/:_id/posts : [
+        methods : [
+           GET
+       ]
+       components : [
+           user_posts,
+       ]
+]
+
+/user/:_id/posts/:postid : [
+        methods : [
+           GET
+       ]
+       components : [
+           user_post_id,
+       ]
+]
+
+/user/:_id/stories : [
+        methods : [
+           GET
+       ]
+       components : [
+           user_stories,
+       ]
+]
+
+/user/:_id/posts/:storyid : [
+        methods : [
+           GET
+       ]
+       components : [
+           user_post_id,
+       ]
+]
+
+/feed : [
+        methods : [
+           GET
+       ]
+       components : [
+           stories,
+           posts,
+           live,
+
+       ]
+]
+
+/user/:_id/friends : [
+    methods : [
+           GET
+       ]
+    components : [
+        friends_avail ? friends_list : empty
+    ]
+]
+
+/user/:_id/profile/edit : [
+     methods : [
+           PATCH,
+       ]
+       components : [
+           <> profile
+       ]
+]
+
+/user/create : [
+    methods : [
+        GET,
+        POST
+    ]
+
+    components_GET : [
+        redirect(/profile/template)
+    ]
+
+    components_POST : [
+        redirect(/user/:_id/profile)
+
+    ]
+]

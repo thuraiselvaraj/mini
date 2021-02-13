@@ -38,6 +38,11 @@ app.get("/test",(req,res)=>{
   res.end()
 })
 
+
+app.get("/user/:user",(req,res)=>{
+  req.params
+})
+
 app.listen({host,port},()=>{
     console.log(`Server started successfully on PORT ${port}`)
      })

@@ -1,35 +1,26 @@
 const express=require("express")
-const conn=require("../Models/connection.js").client 
+// const conn=require("../Models/connection.js").client 
 const router=express.Router()
 const app=express()
 const bodyParser=require("body-parser")
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
-const post_query="insert into user_details\
-     values($1,$2,$3)"
+app.get("/user/:user",(req,res)=>{
+    console.log(req.params)
+    res.send(req.params)
+})
 
-// app.get("/get",(req,res,next)=>{
-//     // conn.query("select * from user_details u where u.id=$1",[req.id])
-//     // .then(data=>{
+app.get("/user/:user/posts",(req,res)=>{
+    console.log(req.params)
+    res.send(req.params)
+})
 
-//     // })
-//     console.log(req.body)
-//     next()
 
-// })
+app.get("/user/:user/profile",(req,res)=>{
+    console.log(req.params)
+    res.send(req.params)
+})
 
-// router.get("/",(req,res,next)=>{
-//    console.log("Calling middleware /")
-//    next()
-// })
-
-// app.get("/patch",(req,res)=>{
-//     console.log("Done /patch")
-//     res.send("Blaba")
-//     // res.redirect("/get")
-// })
-
-// app.use(router);
 
 app.listen({port:3000,host:'localhost'},()=>{
     console.log("Server started successfully")
