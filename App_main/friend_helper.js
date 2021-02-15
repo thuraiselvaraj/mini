@@ -1,14 +1,13 @@
 const router=require("express").Router();
 const conn=require("../Postgres_Models/connection.js").client 
-const queue=require("./pubsub_queue");
+const queue=require("../Chat/pubsub_queue");
 
-function is_friends(s_id,r_id){
-    conn.query(`select 1  from friends where a_id=$1 and b_id=$2 or a_id=$2 and b_id=$1`,[s_id,r_id].sort((a,b)=>a-b)
-    .then(data=>{
-          return !!data.rows.length
-    })
-    
+async function is_friends(s_id,r_id){
+    let data=await conn.query(`select 1  from friends where a_id=$1 and b_id=$2 or a_id=$2 and b_id=$1`,[s_id,r_id].sort((a,b)=>a-b))
+    return data
 }
+
+// console.log(is_friends(5,6).then(console.log))
 
 router.get("/friends/:id",(req,res)=>{
     // change :id and set it from  auth
