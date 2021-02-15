@@ -1,11 +1,8 @@
-const redis = require("redis"),
-var client = redis.createClient({
-            host:"localhost",
-            port:6379
-        });
 module.exports={
         queue : {},
+
         pub_sub : {},
+
         data_push(r_id,data){
              if(r_id in queue){
                this.queue[r_id].write(data)
@@ -32,5 +29,9 @@ module.exports={
         rs_remove(rs_id){
              delete this.queue[rs_id]
 
+        },
+
+        queue_get_online(s_id){
+          return this.pub_sub["offline"][s_id] || {}
         }
 }

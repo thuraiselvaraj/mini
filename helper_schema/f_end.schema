@@ -20,6 +20,7 @@
 
             ]
             user_mutual_components : [
+                isfriends,
                 user_mut_details,
             ]
        ]

@@ -3,7 +3,7 @@
 DROP TABLE IF EXISTS user_details;
 
 CREATE TABLE IF NOT EXISTS login (
-    id SERIAL PRIMARY KEY UNIQUE,
+    id SERIAL UNIQUE,
     email varchar not null unique,
     firstname varchar,
     lastname varchar,

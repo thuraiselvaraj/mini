@@ -2,11 +2,12 @@ const express=require("express");
 const bodyParser=require("body-parser");
 const app=express();
 const events=require("events");
-const redis = require("redis"),
-const client = redis.createClient({
-            host:"localhost",
-            port:6379
-        });
+const redis = require("redis");
+const router=require("./list_friends");
+// const client = redis.createClient({
+//             host:"localhost",
+//             port:6379
+//         });
 // const queue = new events.EventEmitter();
 const server = require('http').createServer(app)
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 
 
 app.use("/", express.static("static"));
+app.use("/",router)
 
 app.post("/write/:_id",(req,res)=>{
     // // console.log(JSON.stringify(req.body))
