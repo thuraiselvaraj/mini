@@ -1,4 +1,4 @@
-const conn=require("../Postgres_Models/connection.js").client 
+const conn=require("../pg_models/connection.js").client 
 // const post_query="insert into user_details\
 //      values($1,$2,$3,$4,$5,$6,$7,$8) returning *"
 

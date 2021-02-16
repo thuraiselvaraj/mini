@@ -1,5 +1,5 @@
-const conn=require("../Postgres_Models/connection.js").client
-const {CreateCookie}=require("./createCookie")
+const conn=require("../pg_models/connection.js").client
+const {CreateCookie}=require("./create_cookie")
 module.exports=function(req,res,next){
     if(req.method=="POST"){
     let email=req.body.email
@@ -16,7 +16,7 @@ module.exports=function(req,res,next){
         .then(data=>{
             if(data.rowCount){
             console.log("password wrong")
-            res.render("Nologin.ejs")
+            res.render("no_login.ejs")
             }
             else
             res.redirect("/signin")
@@ -25,7 +25,7 @@ module.exports=function(req,res,next){
     }
    })
     .catch(err=>{
-        console.log("Loginuser err",err)
+        console.log("login_user err",err)
       res.redirect("/signin")
     })
     }

@@ -1,5 +1,5 @@
 const events=require("events")
-const conn=require("../Postgres_Models/connection.js").client 
+const conn=require("../pg_models/connection.js").client 
 var em = new events.EventEmitter();
 
 //Subscribe for FirstEvent

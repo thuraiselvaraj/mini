@@ -1,4 +1,4 @@
-const conn=require("../Postgres_Models/connection.js").client
+const conn=require("../pg_models/connection.js").client
 module.exports=function(req,res,next){
     console.log(req.cookies.cookie)
     console.log(req.originalUrl)

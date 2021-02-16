@@ -1,6 +1,6 @@
 const router=require("express").Router();
 const conn=require("../pg_models/connection.js").client 
-const queue=require("../chat/pub_sub_queue");
+const queue=require("../chat/pubsub_queue");
 
 async function is_friends(s_id,r_id){
     let data=await conn.query(`select 1  from friends where a_id=$1 and b_id=$2 or a_id=$2 and b_id=$1`,[s_id,r_id].sort((a,b)=>a-b))

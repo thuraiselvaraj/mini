@@ -1,5 +1,5 @@
-const conn=require("../Postgres_Models/connection.js").client
-const {CreateCookie}=require("./createCookie")
+const conn=require("../pg_models/connection.js").client
+const {CreateCookie}=require("./create_cookie")
 module.exports=function(req,res,next){
   if(req.method=="POST"){
     let firstname=req.body.firstname
@@ -14,11 +14,11 @@ module.exports=function(req,res,next){
     })
     .catch(err=>{
     console.error(err.stack)
-    res.render("Nosign_in.ejs")
+    res.render("no_signin.ejs")
     })
     }
     else{
-        res.render("sign_in.ejs")
+        res.render("signin.ejs")
     }
 }
   

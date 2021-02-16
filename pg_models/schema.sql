@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS comments(
 
 CREATE TABLE IF NOT EXISTS post(
     id  int references login(id) on delete cascade on update cascade,
-    post_id int,
+    post_id SERIAL PRIMARY KEY UNIQUE,
     post_url varchar,
     post_desc varchar,
     post_time TIMESTAMPTZ NOT NULL DEFAULT Now() ,
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS user_post_relation(
 
 
 CREATE TABLE  IF  NOT EXISTS chats(
-    chat_id serial  PRIMARY KEY UNIQUE,
+    chat_id int  PRIMARY KEY UNIQUE,
     sender_id  int references login(id) on delete cascade on update cascade,
     receiver_id  int references login(id) on delete cascade on update cascade,
     chat_content varchar,
@@ -94,9 +94,26 @@ CREATE TABLE  IF  NOT EXISTS friends(
 
 CREATE TABLE  IF  NOT EXISTS friends(
     a_id int ,
-    b_id int ,
+    b_id int 
 );
 
+CREATE TABLE IF NOT EXISTS tag(
+    tag_id SERIAL PRIMARY KEY UNIQUE,
+    tag_quote varchar
+);
 
-    
+CREATE TABLE  IF  NOT EXISTS live(
+    l_id SERIAL PRIMARY KEY UNIQUE,
+    l_key varchar ,          
+    l_by int references login(id) on delete cascade on update cascade,
+    l_desc varchar,
+    l_timestamp TIMESTAMPTZ NOT NULL DEFAULT Now()
+
+);
+
+CREATE TABLE  IF  NOT EXISTS tag_live(
+    t_id int references tag(tag_id) on delete cascade on update cascade,
+    l_id int references live(l_desc)  on delete cascade on update cascade,
+    primary key(t_id,l_id)
+);
 
