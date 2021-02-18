@@ -14,4 +14,8 @@ mongoose.connect("mongodb://localhost:27017/mini",{
 //     console.log((x))
 // })
 
-Discussion.deleteOne({_id:2}).then(console.log)
+Discussion.deleteOne({_id:1}).then(x=>{
+  console.log("Main then",x)
+}).catch(e=>{
+console.log("Main err",e)
+})

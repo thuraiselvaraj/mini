@@ -56,49 +56,35 @@ DiscussionSchema.set('toJSON', { virtuals: true })
 
 
 
-//working
-// DiscussionSchema.pre("deleteOne",async function(next){
-//       // console.log("getting in ",{_id:this.getQuery()._id})
-//       let x=await this.model.findOne({_id:this.getQuery()._id})
-//       // console.log(x)
-//       if(x){
-//       //    console.log("Del",x._id,x.replies)
-//          x.replies.map(async x=>{
-//                   console.log(x)
-//                   this.model.deleteOne({_id:x})
-//                   })
-//       }
 
+// DiscussionSchema.post("deleteOne",function(next){
+//       console.log("Post Middles")
+//       console.log(next)
 // })
 
-
+// Final working
 DiscussionSchema.pre("deleteOne",function(next){
       console.log("getting in ",{_id:this.getQuery()._id})
       this.model.findOne({_id:this.getQuery()._id}).then(x=>{
-            if(x){
-                          console.log("Del",x._id,x.replies)
-                          this.model.deleteMany({_id:x.replies}).then(x=>{
-                          console.log("delete then")
-                          console.log(x)
-                          return next()
-                     })
-                  }
-
-      })
-      
-})
-DiscussionSchema.pre("deleteMany",function(next){
-      console.log("getting in many ",this.getQuery()._id)
-      Promise.all(this.getQuery()._id.map(x=>{
-           return this.model.deleteOne({_id:x})
-             })).then(x=>{
-                  console.log("deletemany then")
-                  console.log(x)
-                  return next()
+      // console.log(thenCb==next)
+      next()
+      if(x){
+             console.log("Del",x._id,x.replies)
+             x.replies.map(y=>{
+             console.log("The y value is ",y)
+             this.model.deleteOne({_id:y}).then(x=>{
+                   console.log("data",x)
+             }).catch(x=>{
+                   console.log("error",x)
+                  //  console.error(x)
              })
-      
-})
+             })
 
+            }
+            
+      })
+ 
+ })
 
 
 module.exports=mongoose.model("Discussion",DiscussionSchema)

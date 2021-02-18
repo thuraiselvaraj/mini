@@ -37,9 +37,68 @@ DiscussionSchema.pre("deleteOne",async function(next){
       //    console.log("Del",x._id,x.replies)
          x.replies.map(async x=>{
                   console.log(x)
-                  this.model.deleteOne({_id:x})
+                  await this.model.deleteOne({_id:x})
                   })
       }
 
 })
 }
+
+
+
+
+//working
+DiscussionSchema.pre("deleteOne",function(next){
+     console.log("getting in ",{_id:this.getQuery()._id})
+     this.model.findOne({_id:this.getQuery()._id}).then(x=>{
+     if(x){
+            console.log("Del",x._id,x.replies)
+
+            x.replies.map(y=>{
+            console.log("The y value is ",y)
+            this.model.deleteOne({_id:y}).then(x=>{
+                  console.log("Deleted then")
+                  console.log(x)   
+         
+            }).catch(x=>{
+                  console.log("Error")
+                  console.error(x)
+            })
+            return next() 
+            })
+            next()
+           }
+           
+     })
+     // else return next()   
+//     return next("cooo")
+
+})
+
+
+
+
+// Final working perfect
+DiscussionSchema.pre("deleteOne",function(next){
+     console.log("getting in ",{_id:this.getQuery()._id})
+     this.model.findOne({_id:this.getQuery()._id}).then(x=>{
+     next()
+     if(x){
+            console.log("Del",x._id,x.replies)
+            x.replies.map(y=>{
+            console.log("The y value is ",y)
+            this.model.deleteOne({_id:y}).then(x=>{
+                  console.log("Deleted then")
+                  console.log(x)   
+         
+            }).catch(x=>{
+                  console.log("Error")
+                  console.error(x)
+            })
+            })
+
+           }
+           
+     })
+
+})
