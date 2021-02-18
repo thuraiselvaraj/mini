@@ -71,13 +71,14 @@ mongoose.connect("mongodb://localhost:27017/mini",{
 
 
 Discussion.findOne({_id:'1'}).populate({
-     path:'reply',
+     path:'replies',
      populate :{
-         path :'reply',
+         path :'replies',
          populate :{
-            path :'reply'
+            path :'replies'
                }
             }
-}).then(x=>{
+})
+.then(x=>{
     console.log(JSON.stringify(x))
 })

@@ -13,11 +13,11 @@ var DiscussionSchema=new Schema({
       replies : [{type:String ,ref:"Discussion"}],
 })
 
-DiscussionSchema.virtual("reply",{
-      ref : "Discussion",
-      localField : 'replies',
-      foreignField : '_id',
-})
+// DiscussionSchema.virtual("reply",{
+//       ref : "Discussion",
+//       localField : 'replies',
+//       foreignField : '_id',
+// })
 DiscussionSchema.set('toObject', { virtuals: true });
 DiscussionSchema.set('toJSON', { virtuals: true })
 
