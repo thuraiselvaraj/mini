@@ -310,3 +310,35 @@ function thenCb(x,flag){
 // Error
 // flag
 
+
+
+
+x=[2,3,4,5,6]
+DiscussionSchema.pre("deleteOne",function(next){
+      console.log("getting in ",{_id:this.getQuery()._id})
+      next()
+      if(x.length){
+            //  console.log("The y value is ",y)
+             this.model.deleteOne({_id:x.pop()}).then(x=>{
+                   console.log("data",x)
+             }).catch(x=>{
+                   console.log("error",x)
+             })
+          
+
+            }
+ })
+
+// getting in  { _id: 1 }
+// getting in  { _id: 6 }
+// getting in  { _id: 5 }
+// getting in  { _id: 4 }
+// getting in  { _id: 3 }
+// getting in  { _id: 2 }
+// db is connected
+// Main then { ok: 1, n: 1, deletedCount: 1 }
+// data { ok: 1, n: 1, deletedCount: 1 }
+// data { ok: 1, n: 1, deletedCount: 1 }
+// data { ok: 1, n: 1, deletedCount: 1 }
+// data { ok: 1, n: 1, deletedCount: 1 }
+// data { ok: 1, n: 1, deletedCount: 1 }

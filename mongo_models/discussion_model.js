@@ -39,44 +39,19 @@ DiscussionSchema.set('toJSON', { virtuals: true })
 //         })
 //         return next
 //       })
-// DiscussionSchema.pre("deleteOne",function(next){
-
-//       // console.log(next)
-//       // console.log("Id is",this.getQuery()._id)
-//       this.model.findOne({_id:this.getQuery()._id}).then(x=>{
-//             console.log("DElel",x)
-//       })
-//       // return next()
-      
-// })
-// DiscussionSchema.pre("deleteMany",function(next){
-//       console.log(this.getQuery().id)
-//       return next()
-// })
-
-
-
-
-// DiscussionSchema.post("deleteOne",function(next){
-//       console.log("Post Middles")
-//       console.log(next)
-// })
 
 // Final working
 DiscussionSchema.pre("deleteOne",function(next){
       console.log("getting in ",{_id:this.getQuery()._id})
       this.model.findOne({_id:this.getQuery()._id}).then(x=>{
-      // console.log(thenCb==next)
       next()
       if(x){
              console.log("Del",x._id,x.replies)
              x.replies.map(y=>{
-             console.log("The y value is ",y)
              this.model.deleteOne({_id:y}).then(x=>{
-                   console.log("data",x)
+                   console.log("deleted Items",x)
              }).catch(x=>{
-                   console.log("error",x)
-                  //  console.error(x)
+                   console.error(x)
              })
              })
 
@@ -85,6 +60,9 @@ DiscussionSchema.pre("deleteOne",function(next){
       })
  
  })
+
+
+
 
 
 module.exports=mongoose.model("Discussion",DiscussionSchema)

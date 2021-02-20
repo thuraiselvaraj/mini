@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<!-- <video width="320" height="240">
+</video> -->
+<!-- <input type="file" accept="video/*">Upload your video file </input> -->
+
+<script>
+    var video = document.getElementsByTagName("video")[0];
+    window.addEventListener('keydown', function (evt) {
+    video.pause()
+    console.log("Triggered",evt.keyCode )
+    if (video.paused) {
+        if (evt.keyCode === 37) { //left arrow
+            console.log("Left")
+            video.currentTime-=2
+        } else if (evt.keyCode === 39) { //right arrow
+            console.log("Right")
+            video.currentTime+=2
+        }
+    }        
+});
+document.querySelector("input[type=file]")
+.onchange = function(event) {
+  let file = event.target.files[0];
+  let blobURL = URL.createObjectURL(file);
+  console.log(blobURL)
+  video.src = blobURL;
+}
+
+function sms(d) {
+    d = Number(d);
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+    return h+":"+m+":"+s
+}
+
+</script>
+</body>
+</html>
