@@ -92,10 +92,6 @@ CREATE TABLE  IF  NOT EXISTS friends(
     b_id int references login(id) on delete cascade on update cascade,
 );
 
-CREATE TABLE  IF  NOT EXISTS friends(
-    a_id int ,
-    b_id int 
-);
 
 CREATE TABLE IF NOT EXISTS tag(
     tag_id SERIAL PRIMARY KEY UNIQUE,
