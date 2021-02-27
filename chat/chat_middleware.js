@@ -12,5 +12,11 @@ router.get("/friends",(req,res)=>{
 
 
 
+router.get("/conv",(req,res)=>{
+    
+})
+
+
+
 
 

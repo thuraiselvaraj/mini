@@ -16,7 +16,7 @@ router.get(":device/:m_id",(req,res)=>{
 
 
 // No media caching
-router.get("media/gal/:page",(req,res)=>{
+router.get("media/gal/:uid/:page",(req,res)=>{
     let page=req.params.page
     if(!page){
         //set page to 0 and send 5 posts

@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 const Discussion=require("./models/discussion_model");
-// Discussion.prototype.class_=()=>Discussion;
+
 
 mongoose.connect("mongodb://localhost:27017/mini",{
     useNewUrlParser: true,

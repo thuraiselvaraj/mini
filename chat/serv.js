@@ -3,7 +3,7 @@ const bodyParser=require("body-parser");
 const app=express();
 const events=require("events");
 const redis = require("redis");
-const router=require("./list_friends");
+
 // const client = redis.createClient({
 //             host:"localhost",
 //             port:6379

@@ -1,7 +1,7 @@
 const mongoose=require("mongoose")
 const {Schema}=mongoose
 
-const Comment=new Schema({
+const CommentSchema=new Schema({
     u_id :{type: Number,required :true},
     p_id : {type: Number,required :true},
     s_id : {type: Number,required :true},

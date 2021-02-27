@@ -77,14 +77,14 @@ CREATE TABLE IF NOT EXISTS user_post_relation(
 
 
 
-CREATE TABLE  IF  NOT EXISTS chats(
-    chat_id int  PRIMARY KEY UNIQUE,
-    sender_id  int references login(id) on delete cascade on update cascade,
-    receiver_id  int references login(id) on delete cascade on update cascade,
-    chat_content varchar,
-    chat_time TIMESTAMPTZ NOT NULL DEFAULT Now() ,
-    chat_med_url varchar
-) ;
+-- CREATE TABLE  IF  NOT EXISTS chats(
+--     chat_id int  PRIMARY KEY UNIQUE,
+--     sender_id  int references login(id) on delete cascade on update cascade,
+--     receiver_id  int references login(id) on delete cascade on update cascade,
+--     chat_content varchar,
+--     chat_time TIMESTAMPTZ NOT NULL DEFAULT Now() ,
+--     chat_med_url varchar
+-- ) ;
 
 
 CREATE TABLE  IF  NOT EXISTS friends(
